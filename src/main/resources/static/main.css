@@ -1,0 +1,299 @@
+:root {
+    --background: #000000;
+    --text-colour: #ffffff;
+    --primary-colour: #6C0E18FF;
+    --secondary-colour: #a40000;
+    --message-colour: #3d080d;
+    --message-hover-colour: #4f0d13;
+}
+
+@font-face {
+    font-family: ubuntu;
+    src: url(fonts/Ubuntu-Regular.ttf);
+}
+
+* {
+    color: var(--text-colour);
+    font-family: ubuntu, serif;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    background-color: var(--background);
+}
+
+.nav {
+    background-color: var(--primary-colour);
+    overflow: hidden;
+    width: 100%;
+}
+
+.nav a {
+    cursor: pointer;
+    float: left;
+    display: block;
+    color: var(--text-colour);
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.nav a:hover {
+    background-color: var(--secondary-colour);
+}
+
+.nav a.active {
+    background-color: var(--secondary-colour);
+}
+
+/* Hide the link that should open and close the nav on small screens */
+.nav .icon {
+    display: none;
+}
+
+/* When the screen is less than 600 pixels wide, hide all links, except for the first one ("Home").
+Show the link that contains should open and close the nav (.icon) */
+@media screen and (max-width: 600px) {
+    .nav a:not(:first-child) {display: none;}
+    .nav a.icon {
+        float: right;
+        display: block;
+    }
+}
+
+/* The "responsive" class is added to the topnav with JavaScript when the user clicks on the icon.
+This class makes the topnav look good on small screens
+(display the links vertically instead of horizontally) */
+@media screen and (max-width: 600px) {
+    .nav.responsive {position: relative;}
+    .nav.responsive a.icon {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    .nav.responsive a {
+        float: none;
+        display: block;
+        text-align: left;
+    }
+}
+
+
+.content {
+    background-color: var(--secondary-colour);
+    width: 80%;
+    height: 80%;
+    margin: 30px 10%;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+
+.input-div {
+    height: 10%;
+    padding: 0.6% 1%;
+}
+
+.message-input {
+    color: black;
+    margin: 0;
+    width: 86%;
+    height: 85%;
+    border-radius: 10px 0 0 10px;
+}
+
+.message-button {
+    color: black;
+    width: 11%;
+    height: 90%;
+    border-radius: 0 10px 10px 0;
+}
+
+.title-div {
+    height: 6%;
+    padding: 5px;
+}
+
+.title-div h2 {
+    margin: 3px;
+}
+
+.message-canvas {
+    background-color: var(--primary-colour);
+    width: auto;
+    height: 77%;
+    overflow: auto;
+    border-radius: 6px;
+    padding: 10px 5px;
+}
+
+.message-block {
+    float: left;
+    width: 100%;
+}
+
+.message {
+    width: fit-content;
+    padding: 1px 10px;
+    background-color: var(--message-colour);
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.message:hover {
+    background-color: var(--message-hover-colour);
+}
+
+.message p {
+    margin: 3px;
+}
+
+.divider {
+    background-color: var(--primary-colour);
+    width: 100%;
+    height: 3px;
+}
+
+.from-user {
+    float: right;
+}
+
+.status {
+    background-color: var(--primary-colour);
+    padding: 0;
+    position: fixed;
+    bottom: 0;
+    width: fit-content;
+    border-radius: 0 10px 0 0;
+}
+.status p {
+    margin: 7px;
+}
+
+.hide {
+    display: none;
+}
+
+.login-canvas {
+    background-color: var(--primary-colour);
+    width: auto;
+    height: 100%;
+    overflow: auto;
+    border-radius: 6px;
+    padding: 10px 5px;
+    text-align: center;
+    align-content: center;
+}
+
+.login-buttons {
+    color: black;
+    float: bottom;
+    width: 100%;
+}
+
+.login-buttons button {
+    margin-top: 5px;
+    color: black;
+}
+
+.user-div {
+    width: 50%;
+    float: left;
+}
+
+.pass-div {
+    width: 50%;
+    float: right;
+}
+
+.login-username {
+    color: black;
+    border-radius: 10px 0 0 10px;
+    float: right;
+}
+
+.login-password {
+    color: black;
+    border-radius: 0 10px 10px 0;
+    float: left;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*alexi stinky styles*/
+
+.fade-in {
+    animation: fadeIn ease 0.5s;
+    -webkit-animation: fadeIn ease 0.5s;
+    -moz-animation: fadeIn ease 0.5s;
+    -o-animation: fadeIn ease 0.5s;
+    -ms-animation: fadeIn ease 0.5s;
+}
+@keyframes fadeIn {
+    0% {
+        opacity:0;
+    }
+    100% {
+        opacity:1;
+    }
+}
+
+@-moz-keyframes fadeIn {
+    0% {
+        opacity:0;
+    }
+    100% {
+        opacity:1;
+    }
+}
+
+@-webkit-keyframes fadeIn {
+    0% {
+        opacity:0;
+    }
+    100% {
+        opacity:1;
+    }
+}
+
+@-o-keyframes fadeIn {
+    0% {
+        opacity:0;
+    }
+    100% {
+        opacity:1;
+    }
+}
+
+@-ms-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
