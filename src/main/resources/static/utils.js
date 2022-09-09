@@ -55,10 +55,12 @@ const login = (register) => {
     const username = document.getElementById("user").value;
     const password = document.getElementById("pass").value;
 
+    const hashPass = CryptoJS.SHA256(password);
+
     const loginQuery = {
         type: 'Q',
         command: 1,
-        args: [username, password, register],
+        args: [username, hashPass.toString(), register],
         timeSent: "now",
         senderId: null
     }

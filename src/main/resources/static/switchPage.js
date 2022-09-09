@@ -42,6 +42,9 @@ const switchPage = (page) => {
 
             document.getElementById('message-controller').addEventListener('submit', sendMessage)
             break;
+        case "register":
+
+            break;
         default:
             console.log("default")
     }
