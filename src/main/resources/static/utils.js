@@ -1,4 +1,3 @@
-let loggedInUser = "Huon";
 let lightModeBool = true;
 
 const lightMode = () => {
@@ -52,15 +51,14 @@ const newMessage = (messageId, sender, time, content) => {
     document.getElementById(messageId).scrollIntoView();
 }
 
-const login = (event) => {
-    //event.preventDefault();
+const login = (register) => {
     const username = document.getElementById("user").value;
     const password = document.getElementById("pass").value;
 
     const loginQuery = {
         type: 'Q',
         command: 1,
-        args: [username, password],
+        args: [username, password, register],
         timeSent: "now",
         senderId: null
     }
@@ -94,10 +92,19 @@ const login = (event) => {
         })*/
 }
 
+document.getElementById("login-button").addEventListener("click", (event) => {
+    event.preventDefault()
+    login(false)
+})
 
-document.getElementById("pass").addEventListener("keyup", (event) => {
-    if (event.key === 13 || event.key === "Enter") {
-        login(event)
+document.getElementById("register-button").addEventListener("click", (event) => {
+    event.preventDefault()
+    login(true)
+})
+
+document.getElementById("status-div").addEventListener("click", () => {
+    let text = document.getElementById("status-message").innerHTML;
+    if (text === "Disconnected. Click to reconnect.") {
+        connect()
     }
 })
-document.getElementById("login-button").addEventListener("click", login, true)

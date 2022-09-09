@@ -1,28 +1,29 @@
-'use strict'
-
 let stompClient
-let username
+let loggedInUser = "Huon";
 
 const connect = () => {
-    username = loggedInUser;
-    if (username) {
+    if (loggedInUser) {
         stompClient = Stomp.over(new SockJS('http://localhost:4444/omen-chat'))
         stompClient.connect(
             {},
             onConnected,
-            () => document.getElementById('status-message').innerHTML = 'Disconnected.'
+            () => document.getElementById('status-message').innerHTML = 'Disconnected. Click to reconnect.'
         )
     }
 }
 
 const onConnected = () => {
     stompClient.subscribe('/topic/public', onMessageReceived)
-    stompClient.send("/app/chat.newUser",
+    stompClient.send("/app/ping",
         {},
-        JSON.stringify({sender: loggedInUser, type: 'CONNECT'})
+        JSON.stringify({
+            args: ['Q0'],
+            timeSent: "now",
+            senderId: null
+        })
     )
     const status = document.getElementById('status-message')
-    status.innerHTML = 'Websocket is successfully connected!'
+    status.innerHTML = 'connected!'
 }
 
 const sendMessage = (event) => {
@@ -32,7 +33,7 @@ const sendMessage = (event) => {
 
     if (messageContent && stompClient) {
         const chatMessage = {
-            sender: username,
+            sender: loggedInUser,
             content: messageInput.value,
             type: 'CHAT',
             time: 1
@@ -46,6 +47,10 @@ const sendMessage = (event) => {
 const onMessageReceived = (payload) => {
     const message = JSON.parse(payload.body);
     console.log(message)
+
+    if (message.args[0] === "R0") {
+        console.log("ping: " + message.timeSent);
+    }
 
     switch (message.type) {
         case 'CONNECT':

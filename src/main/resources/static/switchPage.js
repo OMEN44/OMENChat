@@ -16,8 +16,8 @@ const switchPage = (page) => {
                             <input id="pass" type="password" class="login-password">
                         </div>
                         <div class="login-buttons">
-                            <button type="button" id="login-button">Submit</button>
-                            <button type="button" id="create-account">Create account</button>
+                            <button type="submit" id="login-button">Submit</button>
+                            <button type="button" id="register-button">Create account</button>
                         </div>
                         <div class="change-log">
                             <p>Change Log</p>

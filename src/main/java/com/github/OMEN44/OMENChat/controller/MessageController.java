@@ -13,7 +13,7 @@ public class MessageController {
     @SendTo("/topic/public")
     public Message ping(@Payload Message m) {
         String s = m.getTimeSent();
-        return Message.builder().type('R').command(0).timeSent("now").args(new String[]{s}).senderId("0").build();
+        return Message.builder().timeSent("now").args(new String[]{"R0", s}).senderId("0").build();
     }
 
     @MessageMapping("/command")
@@ -22,6 +22,4 @@ public class MessageController {
         System.out.println("user: " + m.getArgs()[0] + ", password: " + m.getArgs()[1]);
         return m;
     }
-
-
 }

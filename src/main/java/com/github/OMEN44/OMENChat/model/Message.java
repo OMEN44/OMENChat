@@ -25,13 +25,7 @@ public class Message {
             0 -
     */
 
-    //this should be Q, R, A or U and signifies the command type
-    @Getter
-    private final char type;
-    //this should be the int telling the system how to handle the arguments
-    @Getter
-    private final int command;
-    //arguments specific to the command
+    //the first argument must be the command in form "R19" the rest of the arguments are command specific
     @Getter
     private String[] args;
     //date that the message was sent

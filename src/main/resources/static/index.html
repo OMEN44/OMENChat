@@ -5,8 +5,8 @@
     <title>OMEN project</title>
     <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="libraries/crypto-js.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="utils.js"></script>
     <script>
         /* Toggle between adding and removing the "responsive" class to nav when the user clicks on the icon */
         function myFunction() {
@@ -33,12 +33,13 @@
 
     <div id="content" class="content">
     </div>
-    <div class="status fade-in">
+    <div id="status-div" class="status fade-in">
         <p id="status-message">Connecting...</p>
     </div>
     <script src="switchPage.js" onload="switchPage(`login`)"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <script src="utils.js"></script>
     <script src="websockets.js" onload="connect()"></script>
 </body>
 </html>
