@@ -24,8 +24,10 @@ public class Message {
         U (update):
             0 -
     */
-
-    //the first argument must be the command in form "R19" the rest of the arguments are command specific
+    //the label is the command id for example: A12
+    @Getter
+    private String label;
+    //the arguments are command specific
     @Getter
     private String[] args;
     //date that the message was sent
