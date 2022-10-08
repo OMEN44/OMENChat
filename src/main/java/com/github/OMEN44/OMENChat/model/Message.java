@@ -26,6 +26,8 @@ public class Message {
     */
     //the label is the command id for example: A12
     @Getter
+    private String group;
+    @Getter
     private String label;
     //the arguments are command specific
     @Getter

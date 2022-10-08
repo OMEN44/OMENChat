@@ -47,7 +47,7 @@
         <dependency>
             <groupId>com.github.OMEN44</groupId>
             <artifactId>OMENChat-plugin-api</artifactId>
-            <version>master-SNAPSHOT</version>
+            <version>4bf005d4ac</version>
         </dependency>
     </dependencies>
 

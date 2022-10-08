@@ -94,7 +94,7 @@ const login = (register) => {
         })*/
 }
 
-document.getElementById("login-button").addEventListener("click", (event) => {
+/*document.getElementById("login-bton").addEventListener("click", (event) => {
     event.preventDefault()
     login(false)
 })
@@ -102,7 +102,7 @@ document.getElementById("login-button").addEventListener("click", (event) => {
 document.getElementById("register-button").addEventListener("click", (event) => {
     event.preventDefault()
     login(true)
-})
+})*/
 
 document.getElementById("status-div").addEventListener("click", () => {
     let text = document.getElementById("status-message").innerHTML;

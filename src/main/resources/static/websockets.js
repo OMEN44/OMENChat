@@ -17,9 +17,7 @@ const onConnected = () => {
     stompClient.send("/app/ping",
         {},
         JSON.stringify({
-            args: ['Q0'],
-            timeSent: "now",
-            senderId: null
+            label: "ping"
         })
     )
     const status = document.getElementById('status-message')

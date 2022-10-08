@@ -5,24 +5,16 @@ const switchPage = (page) => {
                 <div class="title-div">
                     <h2>Login</h2>
                 </div>
-                <div id="login-canvas" class="login-canvas">
-                    <form id="login-form">
-                        <div class="user-div">
-                            <label>Username</label>
-                            <input id="user" type="text" class="login-username">
-                        </div>
-                        <div class="pass-div">
-                            <label>Password</label>
-                            <input id="pass" type="password" class="login-password">
-                        </div>
-                        <div class="login-buttons">
-                            <button type="submit" id="login-button">Submit</button>
-                            <button type="button" id="register-button">Create account</button>
-                        </div>
-                        <div class="change-log">
-                            <p>Change Log</p>
-                        </div>
-                    </form>
+                <form class="login-form">
+                    <input id="username" type="text">
+                    <input id="password" type="password">
+                    <button id="login-btn" type="submit">Login</button>
+                    <button id="create-acc" type="button">Create Account</button>
+                    <div class="divider" style="background-color: var(--secondary-colour)"></div>
+                    <button id="forgot-pass" type="button">Forgot Password</button>
+                </form>
+                <div class="login-form">
+                    <p>Change Log:</p>
                 </div>
                 `
             break;

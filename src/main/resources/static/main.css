@@ -181,51 +181,40 @@ This class makes the topnav look good on small screens
     display: none;
 }
 
-.login-canvas {
-    background-color: var(--primary-colour);
-    width: auto;
-    height: 100%;
-    overflow: auto;
-    border-radius: 6px;
-    padding: 10px 5px;
-    text-align: center;
-    align-content: center;
+/*Login stylings*/
+
+ .login-form {
+     padding: 10px;
+     width: fit-content;
+     background-color: var(--message-colour);
+     border-radius: 10px;
+     margin: auto auto 10px;
+ }
+
+.login-form input {
+    border: 2px solid var(--secondary-colour);
+    margin-bottom: 5px;
+    color: black;
+    padding: 0;
+    width: calc(100% - 4px);
 }
 
-.login-buttons {
-    color: black;
-    float: bottom;
+#login-btn, #create-acc {
+    margin-bottom: 5px;
+    width: calc(50% - 2px);
+}
+
+#forgot-pass {
+    margin-top: 5px;
     width: 100%;
 }
 
-.login-buttons button {
-    margin-top: 5px;
-    color: black;
+.login-form button {
+    background-color: var(--message-colour);
+    border: 2px solid var(--secondary-colour);
+    padding: 3px 0 3px 0;
+    color: var(--text-colour);
 }
-
-.user-div {
-    width: 50%;
-    float: left;
-}
-
-.pass-div {
-    width: 50%;
-    float: right;
-}
-
-.login-username {
-    color: black;
-    border-radius: 10px 0 0 10px;
-    float: right;
-}
-
-.login-password {
-    color: black;
-    border-radius: 0 10px 10px 0;
-    float: left;
-}
-
-
 
 
 
