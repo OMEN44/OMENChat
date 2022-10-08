@@ -1,6 +1,5 @@
 package com.github.OMEN44.OMENChat.controller;
 
-import com.github.OMEN44.Command;
 import com.github.OMEN44.OmenChatPlugin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +10,7 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.*;
 
-import static com.github.OMEN44.OMENChat.Application.PLUGIN_MGR;
+import static com.github.OMEN44.OMENChat.Main.PLUGIN_MGR;
 
 public class PluginLoader {
 
