@@ -13,7 +13,7 @@ import java.util.*;
 
 public class PluginLoader {
 
-    //private static final Logger LOGGER = LoggerFactory.getLogger(PluginLoader.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(PluginLoader.class);
 
     public static List<OmenChatPlugin> loadPlugins(File location) {
         List<OmenChatPlugin> pl = new ArrayList<>();
@@ -36,10 +36,10 @@ public class PluginLoader {
         try {
             if (pluginList != null) {
                 pm.init(pluginList);
-                System.out.println(pm.getPLUGIN_MAP().size() + " plugins found. Loading now...");
+                LOGGER.info(pm.getPLUGIN_MAP().size() + " plugins found. Loading now...");
                 for (String n : pm.getPLUGIN_MAP().keySet())
                     pm.getPLUGIN_MAP().get(n).onEnable();
-            } else System.out.println("No plugins found. Nothing to load.");
+            } else LOGGER.info("No plugins found. Nothing to load.");
         } catch (Exception e) {
             return null;
         }

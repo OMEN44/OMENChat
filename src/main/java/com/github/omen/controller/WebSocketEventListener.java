@@ -13,14 +13,14 @@ import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 
 @Component
 public class WebSocketEventListener {
-    //private static final Logger LOGGER = LoggerFactory.getLogger(WebSocketEventListener.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(WebSocketEventListener.class);
 
     @Autowired
     private SimpMessageSendingOperations sendingOperations;
 
     @EventListener
     public void handleWebSocketConnectListener(final SessionConnectedEvent event) {
-        System.out.println("User has connected");
+        LOGGER.info("User has connected");
     }
 
     @EventListener
@@ -30,6 +30,6 @@ public class WebSocketEventListener {
         final Message chatMessage = Message.builder().senderId(username).build();
 
         sendingOperations.convertAndSend("/topic/public", chatMessage);
-        System.out.println("User has disconnected");
+        LOGGER.info("User has disconnected");
     }
 }
