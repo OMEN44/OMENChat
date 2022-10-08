@@ -13,20 +13,18 @@ import java.util.Map;
 public class PluginManager {
     @Getter
     private final Map<String, OmenChatPlugin> PLUGIN_MAP = new HashMap<>();
-    private static final Logger LOGGER = LoggerFactory.getLogger(PluginManager.class);
+    //private static final Logger LOGGER = LoggerFactory.getLogger(PluginManager.class);
 
     public void init(List<OmenChatPlugin> pluginList) {
         List<String> l = new ArrayList<>();
         for (OmenChatPlugin o : pluginList) {
-            if (!PLUGIN_MAP.containsKey(o.getName())) {
-                System.out.println(o.getCommandExecutors());
+            if (!PLUGIN_MAP.containsKey(o.getName()))
                 setPlugin(o.getName(), o);
-            }
             else l.add(o.getName());
         }
         if (l.size() != 0) {
-            LOGGER.info("The following plugins had duplicate id's and were skipped:");
-            for (String s : l) LOGGER.info(s);
+            System.out.println("The following plugins had duplicate id's and were skipped:");
+            for (String s : l) System.out.println(s);
         }
     }
 
