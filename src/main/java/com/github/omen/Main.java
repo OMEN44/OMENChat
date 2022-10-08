@@ -1,7 +1,7 @@
-package com.github.OMEN44.OMENChat;
+package com.github.omen;
 
-import com.github.OMEN44.OMENChat.controller.PluginLoader;
-import com.github.OMEN44.OMENChat.controller.PluginManager;
+import com.github.omen.controller.PluginLoader;
+import com.github.omen.controller.PluginManager;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

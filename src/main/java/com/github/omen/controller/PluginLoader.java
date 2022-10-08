@@ -1,6 +1,7 @@
-package com.github.OMEN44.OMENChat.controller;
+package com.github.omen.controller;
 
 import com.github.OMEN44.OmenChatPlugin;
+import com.github.omen.Main;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -9,8 +10,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.*;
-
-import static com.github.OMEN44.OMENChat.Main.PLUGIN_MGR;
 
 public class PluginLoader {
 
@@ -49,8 +48,8 @@ public class PluginLoader {
 
     public static String makeCommandTree() {
         StringBuilder sb = new StringBuilder("Commands");
-        if (PLUGIN_MGR != null) {
-            List<String> plugins = PLUGIN_MGR.getPLUGIN_MAP().keySet().stream().toList();
+        if (Main.PLUGIN_MGR != null) {
+            List<String> plugins = Main.PLUGIN_MGR.getPLUGIN_MAP().keySet().stream().toList();
             int indexA = plugins.size();
 
             //add plugins
@@ -61,7 +60,7 @@ public class PluginLoader {
 
                 List<String> commands = new ArrayList<>();
                 int index = 0;
-                for (String name : PLUGIN_MGR.getPlugin(plugins.get(i)).getCommandExecutors().keySet().stream().toList()) {
+                for (String name : Main.PLUGIN_MGR.getPlugin(plugins.get(i)).getCommandExecutors().keySet().stream().toList()) {
                     if (name.startsWith(plugins.get(i))) {
                         commands.add(name);
                         index += 1;

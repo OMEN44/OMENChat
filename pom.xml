@@ -18,6 +18,7 @@
 
     <properties>
         <java.version>17</java.version>
+        <start-class>com.github.omen.Main</start-class>
     </properties>
 
     <repositories>
@@ -71,7 +72,7 @@
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>2.3.1</version>
                 <configuration>
-                    <outputDirectory>C:\Users\huons\Documents\Programming\JavaPrograms\OMENChat\OMENChat</outputDirectory>
+                    <outputDirectory>C:\Users\huons\Documents\Programming\JavaPrograms\OMENChat\run</outputDirectory>
                 </configuration>
             </plugin>
 <!--            include dependencies-->

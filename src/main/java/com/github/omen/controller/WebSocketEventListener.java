@@ -1,6 +1,6 @@
-package com.github.OMEN44.OMENChat.controller;
+package com.github.omen.controller;
 
-import com.github.OMEN44.OMENChat.model.Message;
+import com.github.omen.model.Message;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

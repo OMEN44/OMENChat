@@ -1,4 +1,4 @@
-package com.github.OMEN44.OMENChat.controller.commands;
+package com.github.omen.controller.commands;
 
 public class Login {
 

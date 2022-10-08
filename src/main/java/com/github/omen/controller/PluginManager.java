@@ -1,6 +1,5 @@
-package com.github.OMEN44.OMENChat.controller;
+package com.github.omen.controller;
 
-import com.github.OMEN44.Command;
 import com.github.OMEN44.OmenChatPlugin;
 import lombok.Getter;
 import org.slf4j.Logger;

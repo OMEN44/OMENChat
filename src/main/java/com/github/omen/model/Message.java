@@ -1,4 +1,4 @@
-package com.github.OMEN44.OMENChat.model;
+package com.github.omen.model;
 
 import lombok.Builder;
 import lombok.Getter;

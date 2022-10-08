@@ -1,4 +1,4 @@
-package com.github.OMEN44.OMENChat.view;
+package com.github.omen.view;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
