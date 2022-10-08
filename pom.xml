@@ -50,6 +50,13 @@
             <artifactId>OMENChat-plugin-api</artifactId>
             <version>4bf005d4ac</version>
         </dependency>
+
+<!--        logger-->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.7.26</version>
+        </dependency>
     </dependencies>
 
     <build>
