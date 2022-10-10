@@ -19,6 +19,8 @@
     <properties>
         <java.version>17</java.version>
         <start-class>com.github.omen.Main</start-class>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
     </properties>
 
     <repositories>
@@ -29,39 +31,35 @@
     </repositories>
 
     <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-websocket</artifactId>
-        </dependency>
+        <!--        lombok-->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <optional>true</optional>
+            <version>1.18.24</version>
+            <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-<!--        plugin api -->
-        <dependency>
-            <groupId>com.github.OMEN44</groupId>
-            <artifactId>OMENChat-plugin-api</artifactId>
-            <version>4bf005d4ac</version>
-        </dependency>
-
-<!--        logger-->
+        <!--        logger-->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
             <version>2.0.3</version>
         </dependency>
+       <!--         spring boot-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+            <version>2.7.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <version>2.7.4</version>
+        </dependency>
     </dependencies>
 
     <build>
         <plugins>
-            <plugin>
+            <!----><plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
@@ -72,39 +70,6 @@
                         </exclude>
                     </excludes>
                 </configuration>
-            </plugin>
-<!--            move jar to OMENChat directory-->
-            <!--<plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>2.3.1</version>
-                <configuration>
-
-                </configuration>
-            </plugin>-->
-<!--            include dependencies-->
-            <plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <mainClass>com.github.omen.Main</mainClass>
-                        </manifest>
-                    </archive>
-                    <outputDirectory>C:\Users\huons\Documents\Programming\JavaPrograms\OMENChat\run</outputDirectory>
-                    <descriptorRefs>
-                        <descriptorRef>jar-with-dependencies</descriptorRef>
-                    </descriptorRefs>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>make-assembly</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
