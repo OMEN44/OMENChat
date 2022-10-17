@@ -1,20 +1,36 @@
 let stompClient
-let loggedInUser = "Huon";
+let connected = false;
+let loggedInUser = null;
+
+/*
+* \omen-chat
+*  ├───\login
+*  ├───\system
+*  └───\chat
+*       └───\<chat-room-id>
+*
+*/
 
 const connect = () => {
-    if (loggedInUser) {
-        stompClient = Stomp.over(new SockJS('http://localhost:4444/omen-chat'))
-        stompClient.connect(
-            {},
-            onConnected,
-            () => document.getElementById('status-message').innerHTML = 'Disconnected. Click to reconnect.'
-        )
-    }
+    stompClient = Stomp.over(new SockJS('http://localhost:4444/omen-chat'))
+    stompClient.connect(
+        {},
+        onConnected,
+        () => {
+            document.getElementById('status-message').innerHTML = 'Disconnected. Click to reconnect.'
+            connected = false;
+        }
+    )
 }
 
 const onConnected = () => {
-    stompClient.subscribe('/topic/public', onMessageReceived)
-    stompClient.send("/app/ping",
+    stompClient.subscribe('/chat', () => {
+        console.log("chat")
+    })
+    stompClient.subscribe("/login", (payload) => {
+        onLoginMessage(payload)
+    })
+    stompClient.send("/app/system",
         {},
         JSON.stringify({
             label: "ping"
@@ -22,29 +38,12 @@ const onConnected = () => {
     )
     const status = document.getElementById('status-message')
     status.innerHTML = 'connected!'
-}
-
-const sendMessage = (event) => {
-    event.preventDefault();
-    const messageInput = document.getElementById('input-bar')
-    const messageContent = messageInput.value.trim()
-
-    if (messageContent && stompClient) {
-        const chatMessage = {
-            sender: loggedInUser,
-            content: messageInput.value,
-            type: 'CHAT',
-            time: 1
-        }
-        stompClient.send("/app/chat.send", {}, JSON.stringify(chatMessage))
-        messageInput.value = ''
-    }
-
+    connected = true;
 }
 
 const onMessageReceived = (payload) => {
+
     const message = JSON.parse(payload.body);
-    console.log(message)
 
     if (message.args[0] === "R0") {
         console.log("ping: " + message.timeSent);

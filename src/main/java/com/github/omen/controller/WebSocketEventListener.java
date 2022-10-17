@@ -11,16 +11,22 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.socket.messaging.SessionConnectedEvent;
 import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 @Component
 public class WebSocketEventListener {
     private static final Logger LOGGER = LoggerFactory.getLogger(WebSocketEventListener.class);
+    public static int userCounter = 0;
 
     @Autowired
     private SimpMessageSendingOperations sendingOperations;
 
     @EventListener
     public void handleWebSocketConnectListener(final SessionConnectedEvent event) {
-        LOGGER.info("User has connected");
+
+        userCounter++;
     }
 
     @EventListener
@@ -30,6 +36,6 @@ public class WebSocketEventListener {
         final Message chatMessage = Message.builder().senderId(username).build();
 
         sendingOperations.convertAndSend("/topic/public", chatMessage);
-        LOGGER.info("User has disconnected");
+        userCounter--;
     }
 }

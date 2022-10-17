@@ -9,23 +9,23 @@ public class Logger {
     public static final String BLACK = "\u001B[30m";
 
     public static void log(String message) {
-        String[] m = message.split("\n");
-        for (String s : m) {
-            System.out.println(GREEN_BACK + BLACK + "[OCS-INFO]:" + RESET + " " + s);
-        }
+        if (message.contains("\n")) {
+            System.out.println(GREEN_BACK + BLACK + "[OCS-INFO]" + RESET + " ");
+            System.out.println("\n" + message);
+        } else System.out.println(GREEN_BACK + BLACK + "[OCS-INFO]" + RESET + " " + message);
     }
 
     public static void warn(String message) {
-        String[] m = message.split("\n");
-        for (String s : m) {
-            System.out.println(YELLOW_BACK + BLACK + "[OCS-WARN]:" + RESET + " " + s);
-        }
+        if (message.contains("\n")) {
+            System.out.println(YELLOW_BACK + BLACK + "[OCS-WARN]" + RESET + " ");
+            System.out.println("\n" + message);
+        } else System.out.println(YELLOW_BACK + BLACK + "[OCS-WARN]" + RESET + " " + message);
     }
 
     public static void error(String message) {
-        String[] m = message.split("\n");
-        for (String s : m) {
-            System.err.println(RED_BACK + BLACK + "[OCS-ERROR]:" + RESET + " " + s);
-        }
+        if (message.contains("\n")) {
+            System.out.println(RED_BACK + BLACK + "[OCS-ERROR]" + RESET + " ");
+            System.out.println("\n" + message);
+        } else System.out.println(RED_BACK + BLACK + "[OCS-ERROR]" + RESET + " " + message);
     }
 }

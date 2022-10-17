@@ -1,7 +1,19 @@
+const onLoginMessage = (payload) => {
+    const message = JSON.parse(payload.body);
+    if (message.args[0] === "success") {
+        loggedInUser = message.args[1];
+        switchPage("chat");
+    } else {
+        //user not logged in
+    }
+}
+
 document.getElementById("login-btn").addEventListener("click", (event) => {
     event.preventDefault();
-    $.getJSON("https://api.ipify.org?format=json", function(data) {
-        stompClient.send("/app/command",
+
+    fetch("http://ip-api.com/json/")
+        .then(res => res.json()).then(data => {
+        stompClient.send("/app/login",
             {},
             JSON.stringify({
                 group: "core",
@@ -13,7 +25,10 @@ document.getElementById("login-btn").addEventListener("click", (event) => {
                         document.getElementById("username").value +
                         document.getElementById("password").value
                     ).toString(),
-                    data.ip
+                    data.lon,
+                    data.lat,
+                    data.city,
+                    data.country
                 ]
             })
         )

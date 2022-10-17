@@ -30,68 +30,14 @@ const setTitle = (title) => {
     return true;
 }
 
-const messagePressed = (message) => {
-    console.log(message.id);
-}
-
-const newMessage = (messageId, sender, time, content) => {
-    let html = document.getElementById("message-canvas").innerHTML
-    let messageClass = "message fade-in";
-    if (loggedInUser === sender)
-        messageClass += " from-user";
-    html += `
-            <div class="message-block">
-                <div id="${messageId}" class="${messageClass}" onclick="messagePressed(this)">
-                    <p>${sender} | ${time}</p>
-                    <div class="divider"></div>
-                    <p>${content}</p>
-                </div>
-            </div>`;
-    document.getElementById("message-canvas").innerHTML = html;
-    document.getElementById(messageId).scrollIntoView();
-}
-
-const login = (register) => {
-    const username = document.getElementById("user").value;
-    const password = document.getElementById("pass").value;
-
-    const hashPass = CryptoJS.SHA256(password);
-
-    const loginQuery = {
-        type: 'Q',
-        command: 1,
-        args: [username, hashPass.toString(), register],
-        timeSent: "now",
-        senderId: null
+/* Toggle between adding and removing the "responsive" class to nav when the user clicks on the icon */
+function myFunction() {
+    const topNav = document.getElementById("topNav");
+    if (topNav.className === "nav") {
+        topNav.className += " responsive";
+    } else {
+        topNav.className = "nav";
     }
-    stompClient.send("/app/command", {}, JSON.stringify(loginQuery))
-
-    /*fetch('http://localhost:5000/login/' + username)
-        .then(response => response.json())
-        .then(data => {
-            if (data['data'].length === 0) {
-                document.getElementById("login-error").innerHTML =
-                    `<p style="color: #f44336">This user does not exist</p>`
-            } else {
-                data['data'].forEach(function ({accessLevel, pass}) {
-                    if (accessLevel === 0) {
-                        if (pass === password) {
-                            toPage("home.html", [`lvl=0`])
-                        } else {
-                            document.getElementById("login-error").innerHTML =
-                                `<p style="color: #f44336">Incorrect user or password</p>`
-                        }
-                    } else {
-                        if (pass === sha256(password)) {
-                            toPage("home.html", [`lvl=${accessLevel}`])
-                        } else {
-                            document.getElementById("login-error").innerHTML =
-                                `<p style="color: #f44336">Incorrect user or password</p>`
-                        }
-                    }
-                })
-            }
-        })*/
 }
 
 /*document.getElementById("login-bton").addEventListener("click", (event) => {

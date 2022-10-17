@@ -2,19 +2,22 @@ const switchPage = (page) => {
     switch (page.toLowerCase()) {
         case "login":
             document.getElementById("content").innerHTML = `
-                <div class="title-div">
-                    <h2>Login</h2>
-                </div>
-                <form class="login-form">
-                    <input id="username" type="text">
-                    <input id="password" type="password">
-                    <button id="login-btn" type="submit">Login</button>
-                    <button id="create-acc" type="button">Create Account</button>
-                    <div class="divider" style="background-color: var(--secondary-colour)"></div>
-                    <button id="forgot-pass" type="button">Forgot Password</button>
-                </form>
-                <div class="login-form">
-                    <p>Change Log:</p>
+                <div>
+                    <div class="title-div">
+                        <h2>Login</h2>
+                    </div>
+                    <form class="login-form">
+                        <input id="username" type="text">
+                        <input id="password" type="password">
+                        <button id="login-btn" type="submit">Login</button>
+                        <button id="create-acc" type="button">Create Account</button>
+                        <div class="divider" style="background-color: var(--secondary-colour)"></div>
+                        <button id="forgot-pass" type="button">Forgot Password</button>
+                    </form>
+                    <div class="login-form">
+                        <p>Change Log:</p>
+                    </div>
+                    <script src="login.js"></script>
                 </div>
                 `
             break;
@@ -32,9 +35,13 @@ const switchPage = (page) => {
                 </form>
                 `
 
-            document.getElementById('message-com.github.omen.controller').addEventListener('submit', sendMessage)
+            document.getElementById('send').addEventListener('submit', (event) => {
+                event.preventDefault();
+                console.log(document.getElementById("send"))
+                sendMessage()
+            })
             break;
-        case "register":
+        case "calender":
 
             break;
         default:
