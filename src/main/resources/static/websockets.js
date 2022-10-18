@@ -1,15 +1,6 @@
-let stompClient
+let stompClient, session;
 let connected = false;
 let loggedInUser = null;
-
-/*
-* \omen-chat
-*  ├───\login
-*  ├───\system
-*  └───\chat
-*       └───\<chat-room-id>
-*
-*/
 
 const connect = () => {
     stompClient = Stomp.over(new SockJS('http://localhost:4444/omen-chat'))
@@ -24,10 +15,18 @@ const connect = () => {
 }
 
 const onConnected = () => {
-    stompClient.subscribe('/chat', () => {
-        console.log("chat")
+    let url = stompClient.ws._transport.url;
+    url = url.replace("ws://localhost:4444/omen-chat/", "");
+    url = url.replace("/websocket", "");
+    url = url.replace(/^[0-9]+\//, "");
+    console.log("Your current session is: " + url);
+    session = url;
+
+    stompClient.subscribe('/chat', (payload) => {
+        const message = JSON.parse(payload.body);
+        newMessage(message.timeSent, message.senderId, message.args)
     })
-    stompClient.subscribe("/login", (payload) => {
+    stompClient.subscribe("/login/" + session, (payload) => {
         onLoginMessage(payload)
     })
     stompClient.send("/app/system",

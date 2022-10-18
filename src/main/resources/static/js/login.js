@@ -3,6 +3,7 @@ const onLoginMessage = (payload) => {
     if (message.args[0] === "success") {
         loggedInUser = message.args[1];
         switchPage("chat");
+        setTitle("Welcome, " + loggedInUser + "!")
     } else {
         //user not logged in
     }
@@ -28,7 +29,8 @@ document.getElementById("login-btn").addEventListener("click", (event) => {
                     data.lon,
                     data.lat,
                     data.city,
-                    data.country
+                    data.country,
+                    session
                 ]
             })
         )

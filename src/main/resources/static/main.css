@@ -216,6 +216,11 @@ This class makes the topnav look good on small screens
     color: var(--text-colour);
 }
 
+.identifier {
+    width: 100%;
+    height: 100%;
+}
+
 
 
 
