@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>OMEN project</title>
     <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="style/login.css">
+    <link rel="stylesheet" href="style/chatSelector.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!--    libraries-->
@@ -16,7 +18,7 @@
     <div class="nav" id="topNav">
         <a href="#chat" class="active">Chat</a>
         <a href="#leaveGroup">Leave Group</a>
-        <a href="#groups">Groups</a>
+        <a href="#groups" onclick="switchPage(`selector`)">Groups</a>
         <a href="#logout">Logout</a>
         <a id="light-button" onclick="lightMode()">Light mode</a>
         <a class="icon" onclick="myFunction()">
@@ -27,20 +29,52 @@
 <!--    Main content div-->
     <div id="content" class="content">
 <!--        login page-->
-        <div id="login" class="identifier hide">
+        <div id="login" class="identifier">
             <div class="title-div">
                 <h2>Login</h2>
             </div>
-            <form class="login-form">
-                <input id="username" type="text">
-                <input id="password" type="password">
-                <button id="login-btn" type="submit">Login</button>
-                <button id="create-acc" type="button">Create Account</button>
-                <div class="divider" style="background-color: var(--secondary-colour)"></div>
-                <button id="forgot-pass" type="button">Forgot Password</button>
-            </form>
+            <div class="login-canvas">
+                <form class="login-form">
+                    <input id="username" type="text">
+                    <input id="password" type="password">
+                    <button id="login-btn" type="submit">Login</button>
+                    <button id="create-acc" type="button">Create Account</button>
+                    <button id="forgot-pass" type="button">Forgot Password</button>
+                </form>
+            </div>
             <div class="login-form">
                 <p>Change Log:</p>
+            </div>
+        </div>
+<!--        Chat selector-->
+        <div id="chat-selector" class="identifier hide">
+            <div class="title-div">
+                <h2>Where would you like to go?</h2>
+            </div>
+            <form class="input-div" name="message-sender">
+                <input id="search-input" autofocus class="message-input" type="text" autoFocus>
+                <button id="chat-search" class="message-button" type="submit">Search</button>
+            </form>
+            <div id="chats-canvas" class="chats-canvas">
+                <div class="chat-card">
+                    <div class="chat-top">
+                        <div class="chat-top-left">
+                            <div class="chat-name">
+                                <p>Name of chat</p>
+                            </div>
+                            <div class="chat-online">
+                                <p>online: 12</p>
+                            </div>
+                        </div>
+                        <div class="chat-top-right">
+                            <button style="color: black">Join</button>
+                            <button style="color: black">Delete Chat</button>
+                        </div>
+                    </div>
+                    <div class="chat-description">
+                        <p>Description of chat</p>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -64,7 +98,7 @@
     <div id="status-div" class="status fade-in">
         <p id="status-message">Connecting...</p>
     </div>
-    <script src="js/switchPage.js" onload="switchPage(`login`)"></script>
+<!--    <script src="js/switchPage.js" onload="switchPage(`login`)"></script>-->
     <script src="js/utils.js"></script>
     <script src="js/chat.js"></script>
     <script src="js/login.js"></script>

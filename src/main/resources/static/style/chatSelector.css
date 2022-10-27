@@ -1,0 +1,103 @@
+.chats-canvas {
+    background-color: var(--primary-colour);
+    width: auto;
+    height: 100%;
+    overflow: auto;
+    border-radius: 6px;
+    padding: 10px 5px;
+}
+
+.chat-card-inner {
+    width: calc(100% - 81px);
+    float: left;
+}
+
+.chat-top {
+    display: flex;
+    flex-flow: row;
+    height: fit-content;
+    width: 100%;
+}
+
+.chat-top-left {
+    display: flex;
+    flex-flow: row;
+    height: fit-content;
+    width: fit-content;
+
+    border-style: none solid solid none;
+    border-color: var(--primary-colour);
+    border-radius: 10px 0 10px 0;
+    background-color: var(--secondary-colour);
+}
+
+.chat-name {
+    border-right-style: solid;
+    border-color: var(--primary-colour);
+    border-radius: 10px 0 10px 0;
+    background-color: var(--secondary-colour);
+    width: fit-content;
+    display: inline-block;
+}
+
+.chat-online {
+    float: left;
+}
+
+.chat-top p {
+    margin: 8px 10px;
+}
+
+.chat-top-right {
+    flex-grow: 1;
+    display: flex;
+    flex-flow: row wrap-reverse;
+    height: fit-content;
+    width: fit-content;
+}
+
+.chat-card button {
+    border-color: var(--primary-colour);
+    background-color: var(--secondary-colour);
+    color: var(--text-colour);
+
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 10px;
+
+    margin-left: 10px;
+    alignment: center;
+    width: fit-content;
+    padding: 3px 5px;
+    transform: translateY(calc(50% - 5px));
+    float: right;
+}
+
+.chat-card button:hover {
+    background-color: var(--message-hover-colour);
+    border-color: var(--secondary-colour);
+}
+
+.chat-card {
+    display: inline-block;
+    width: 100%;
+    height: fit-content;
+    border-radius: 10px;
+    background-color: var(--message-colour);
+}
+
+.chat-description {
+    margin-top: 5px;
+    background-color: var(--secondary-colour);
+    height: 100%;
+    float: bottom;
+    border-radius: 0 0 10px 10px;
+    padding: 8px;
+    border-top-style: solid;
+    border-top-color: var(--primary-colour);
+}
+
+.chat-description p {
+    margin: 0;
+}
+

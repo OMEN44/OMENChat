@@ -2,12 +2,12 @@ let lightModeBool = true;
 
 const lightMode = () => {
     if (lightModeBool) {
-        document.body.style.setProperty('--background',"#000000")
-        document.body.style.setProperty('--text-colour',"#000000")
-        document.body.style.setProperty('--primary-colour',"#2d6c18")
-        document.body.style.setProperty('--secondary-colour',"#29a400")
-        document.body.style.setProperty('--message-colour',"#254f0d")
-        document.body.style.setProperty('--message-hover-colour',"#153d08")
+        document.body.style.setProperty('--background',"#ffffff")
+        document.body.style.setProperty('--text-colour',"#ffffff")
+        document.body.style.setProperty('--primary-colour',"#18426c")
+        document.body.style.setProperty('--secondary-colour',"#006ba4")
+        document.body.style.setProperty('--message-colour',"#0d344f")
+        document.body.style.setProperty('--message-hover-colour',"#082d3d")
         document.getElementById("light-button").innerHTML = "Dark mode";
         lightModeBool = false;
     } else {
