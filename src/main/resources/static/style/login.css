@@ -2,15 +2,55 @@
 <div class="title-div">
     <h2>Login</h2>
 </div>
-<form class="login-form">
-    <input id="username" type="text">
-    <input id="password" type="password">
-    <button id="login-btn" type="submit">Login</button>
-    <button id="create-acc" type="button">Create Account</button>
-    <div class="divider" style="background-color: var(--secondary-colour)"></div>
-    <button id="forgot-pass" type="button">Forgot Password</button>
-</form>
+<div class="login-canvas">
+    <form class="login-form">
+        <input id="username" type="text">
+        <input id="password" type="password">
+        <button id="login-btn" type="submit">Login</button>
+        <button id="create-acc" type="button">Create Account</button>
+        <button id="forgot-pass" type="button">Forgot Password</button>
+    </form>
+</div>
 <div class="login-form">
     <p>Change Log:</p>
 </div>
 */
+
+.login-canvas {
+    background-color: var(--primary-colour);
+    width: auto;
+    height: 100%;
+    overflow: auto;
+    border-radius: 6px;
+    padding: 10px 5px;
+}
+
+.login-form {
+    width: 100%;
+    background-color: var(--message-colour);
+    border-radius: 10px;
+    margin: auto auto 10px;
+}
+
+.login-input-container {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    width: auto;
+    height: fit-content;
+    background-color: var(--secondary-colour);
+    border-bottom-color: var(--primary-colour);
+    border-bottom-style: solid;
+    border-radius: 10px 10px 0 0;
+    margin-bottom: 5px;
+}
+
+.login-button-container {
+    text-align: center;
+    background-color: var(--secondary-colour);
+    border-color: var(--primary-colour);
+    border-style: solid solid none solid;
+    border-radius: 10px 10px 0 0;
+    margin: 0 10px 0 10px;
+    padding: 3px;
+}

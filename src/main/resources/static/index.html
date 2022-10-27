@@ -29,21 +29,25 @@
 <!--    Main content div-->
     <div id="content" class="content">
 <!--        login page-->
-        <div id="login" class="identifier">
+        <div id="login" class="identifier hide">
             <div class="title-div">
                 <h2>Login</h2>
             </div>
             <div class="login-canvas">
                 <form class="login-form">
-                    <input id="username" type="text">
-                    <input id="password" type="password">
-                    <button id="login-btn" type="submit">Login</button>
-                    <button id="create-acc" type="button">Create Account</button>
-                    <button id="forgot-pass" type="button">Forgot Password</button>
+                    <div class="login-input-container">
+                        <input class="input" placeholder="Username" id="username" type="text">
+                        <input class="input" placeholder="Password" id="password" type="password">
+                    </div>
+                    <div class="login-button-container">
+                        <button class="button" id="login-btn" type="submit">Login</button>
+                        <button class="button" id="create-acc" type="button">Create Account</button>
+                        <button class="button" id="forgot-pass" type="button">Forgot Password</button>
+                    </div>
                 </form>
-            </div>
-            <div class="login-form">
-                <p>Change Log:</p>
+                <div class="change-log">
+                    <p>Change Log:</p>
+                </div>
             </div>
         </div>
 <!--        Chat selector-->
@@ -67,8 +71,8 @@
                             </div>
                         </div>
                         <div class="chat-top-right">
-                            <button style="color: black">Join</button>
-                            <button style="color: black">Delete Chat</button>
+                            <button class="button">Join</button>
+                            <button class="button">Delete Chat</button>
                         </div>
                     </div>
                     <div class="chat-description">
@@ -98,7 +102,7 @@
     <div id="status-div" class="status fade-in">
         <p id="status-message">Connecting...</p>
     </div>
-<!--    <script src="js/switchPage.js" onload="switchPage(`login`)"></script>-->
+    <script src="js/switchPage.js" onload="switchPage(`login`)"></script>
     <script src="js/utils.js"></script>
     <script src="js/chat.js"></script>
     <script src="js/login.js"></script>

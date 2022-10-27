@@ -57,25 +57,10 @@
 }
 
 .chat-card button {
-    border-color: var(--primary-colour);
-    background-color: var(--secondary-colour);
-    color: var(--text-colour);
-
-    border-style: solid;
-    border-width: 2px;
-    border-radius: 10px;
-
     margin-left: 10px;
     alignment: center;
-    width: fit-content;
-    padding: 3px 5px;
     transform: translateY(calc(50% - 5px));
     float: right;
-}
-
-.chat-card button:hover {
-    background-color: var(--message-hover-colour);
-    border-color: var(--secondary-colour);
 }
 
 .chat-card {
