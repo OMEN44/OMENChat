@@ -2,8 +2,32 @@ const onLoginMessage = (payload) => {
     const message = JSON.parse(payload.body);
     if (message.args[0] === "success") {
         loggedInUser = message.args[1];
-        switchPage("chat");
-        setTitle("Welcome, " + loggedInUser + "!")
+        switchPage("selector");
+        let html = document.getElementById("chats-canvas").innerHTML
+        for (let i = 0; i < 15; i++) {
+            html = html + `
+            <div class="chat-card">
+                <div class="chat-top">
+                    <div class="chat-top-left">
+                        <div class="chat-name">
+                            <p>Name of chat</p>
+                        </div>
+                        <div class="chat-online">
+                            <p>online: 12</p>
+                        </div>
+                    </div>
+                    <div class="chat-top-right">
+                        <button class="button">Join</button>
+                        <button class="button">Delete Chat</button>
+                    </div>
+                </div>
+                <div class="chat-description">
+                    <p>Description of chat</p>
+                </div>
+            </div>
+            `
+        }
+        document.getElementById("chats-canvas").innerHTML = html;
     } else {
         //user not logged in
     }

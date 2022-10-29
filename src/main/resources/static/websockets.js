@@ -2,64 +2,44 @@ let stompClient, session;
 let connected = false;
 let loggedInUser = null;
 
+const serverEndPoint = 'http://localhost:4444/omen-chat';
+
+//connect to the websocket
 const connect = () => {
-    stompClient = Stomp.over(new SockJS('http://localhost:4444/omen-chat'))
+    stompClient = Stomp.over(new SockJS(serverEndPoint))
     stompClient.connect(
         {},
         onConnected,
         () => {
             document.getElementById('status-message').innerHTML = 'Disconnected. Click to reconnect.'
             connected = false;
+            loggedInUser = null
         }
     )
 }
 
+//when connecting
 const onConnected = () => {
+    //get session Id
     let url = stompClient.ws._transport.url;
-    url = url.replace("ws://localhost:4444/omen-chat/", "");
+    url = url.replace(serverEndPoint + "/", "");
     url = url.replace("/websocket", "");
     url = url.replace(/^[0-9]+\//, "");
-    console.log("Your current session is: " + url);
     session = url;
 
-    stompClient.subscribe('/chat', (payload) => {
+    //user shouldn't be connected to a chat yet
+
+    /*stompClient.subscribe('/chat', (payload) => {
         const message = JSON.parse(payload.body);
         newMessage(message.timeSent, message.senderId, message.args)
-    })
+    })*/
+    //connect to login endpoint
     stompClient.subscribe("/login/" + session, (payload) => {
         onLoginMessage(payload)
     })
-    stompClient.send("/app/system",
-        {},
-        JSON.stringify({
-            label: "ping"
-        })
-    )
+
+    //display connected message
     const status = document.getElementById('status-message')
     status.innerHTML = 'connected!'
     connected = true;
-}
-
-const onMessageReceived = (payload) => {
-
-    const message = JSON.parse(payload.body);
-
-    if (message.args[0] === "R0") {
-        console.log("ping: " + message.timeSent);
-    }
-
-    switch (message.type) {
-        case 'CONNECT':
-            console.log("new user connected")
-            break;
-        case 'DISCONNECT':
-            console.log("user disconnected")
-            break;
-        case 'CHAT':
-            newMessage(message.sender + message.time, message.sender, message.time, message.content)
-            const chat = document.getElementById("message-canvas");
-            chat.scrollTop = chat.scrollHeight;
-            break;
-    }
-
 }

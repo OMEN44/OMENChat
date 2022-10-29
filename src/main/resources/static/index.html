@@ -52,33 +52,17 @@
         </div>
 <!--        Chat selector-->
         <div id="chat-selector" class="identifier hide">
-            <div class="title-div">
-                <h2>Where would you like to go?</h2>
-            </div>
-            <form class="input-div" name="message-sender">
-                <input id="search-input" autofocus class="message-input" type="text" autoFocus>
-                <button id="chat-search" class="message-button" type="submit">Search</button>
-            </form>
-            <div id="chats-canvas" class="chats-canvas">
-                <div class="chat-card">
-                    <div class="chat-top">
-                        <div class="chat-top-left">
-                            <div class="chat-name">
-                                <p>Name of chat</p>
-                            </div>
-                            <div class="chat-online">
-                                <p>online: 12</p>
-                            </div>
-                        </div>
-                        <div class="chat-top-right">
-                            <button class="button">Join</button>
-                            <button class="button">Delete Chat</button>
-                        </div>
-                    </div>
-                    <div class="chat-description">
-                        <p>Description of chat</p>
-                    </div>
+            <div class="chat-header">
+                <div class="title-div">
+                    <h2>Where would you like to go?</h2>
                 </div>
+                <form class="chat-search" name="chat-search">
+                    <input id="search-input" autofocus class="chat-search-input input" type="text" autoFocus>
+                    <button id="chat-search" class="chat-search-button button" type="submit">Search</button>
+                </form>
+            </div>
+            <div id="chats-canvas" class="chats-canvas">
+
             </div>
         </div>
 

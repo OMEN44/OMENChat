@@ -117,12 +117,14 @@ This class makes the topnav look good on small screens
 }
 
 .title-div {
-    height: 6%;
+    height: fit-content;
     padding: 5px;
 }
 
 .title-div h2 {
     margin: 3px;
+    max-font-size: 3px;
+    font-size: 4vw;
 }
 
 .message-canvas {
@@ -221,7 +223,26 @@ This class makes the topnav look good on small screens
     border-color: var(--primary-colour);
 }
 
+/*scroll bar*/
 
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 50%;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 6px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    box-shadow: inset 0 0 4px var(--message-colour);
+    background: var(--secondary-colour);
+    border-radius: 8px;
+}
 
 
 
