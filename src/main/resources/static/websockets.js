@@ -22,7 +22,7 @@ const connect = () => {
 const onConnected = () => {
     //get session Id
     let url = stompClient.ws._transport.url;
-    url = url.replace(serverEndPoint + "/", "");
+    url = url.replace(serverEndPoint.replace("http", "ws") + "/", "");
     url = url.replace("/websocket", "");
     url = url.replace(/^[0-9]+\//, "");
     session = url;
@@ -42,4 +42,12 @@ const onConnected = () => {
     const status = document.getElementById('status-message')
     status.innerHTML = 'connected!'
     connected = true;
+}
+
+const sendJson = (endpoint, json) => {
+    stompClient.send(
+        endpoint,
+        {},
+        JSON.stringify(json)
+    )
 }

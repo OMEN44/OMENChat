@@ -1,12 +1,14 @@
 package com.github.omen.model;
 
-import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
 
-@Builder
+import java.util.Date;
+
+@AllArgsConstructor
 @ToString
-public class Message {
+public class MessageTemplate {
     /*
     QUERIES and RESPONSES are very similar and a query must be followed with a response from the server, use these for
     getting data from the server.
@@ -31,11 +33,27 @@ public class Message {
     private String label;
     //the arguments are command specific
     @Getter
-    private String[] args;
+    private Object[] args;
     //date that the message was sent
     @Getter
-    private final String timeSent;
+    private final Date timeSent;
     //who sent the message
     @Getter
-    private final String senderId;
+    private final int senderId;
+
+    public static MessageTemplate currentDate(String group, String label, int senderId, Object... args) {
+        return new MessageTemplate(group, label, args, new Date(), senderId);
+    }
+
+    public static MessageTemplate senderWithArgs(int senderId, Object... args) {
+        return new MessageTemplate(null, null, args, new Date(), senderId);
+    }
+
+    public static MessageTemplate sentBySystem(String group, String label, Object... args) {
+        return new MessageTemplate(group, label, args, new Date(), 0);
+    }
+
+    public static MessageTemplate argsOnly(Object... args) {
+        return new MessageTemplate(null, null, args, new Date(), 0);
+    }
 }

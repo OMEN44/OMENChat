@@ -124,7 +124,6 @@ This class makes the topnav look good on small screens
 .title-div h2 {
     margin: 3px;
     max-font-size: 3px;
-    font-size: 4vw;
 }
 
 .message-canvas {
@@ -167,7 +166,7 @@ This class makes the topnav look good on small screens
     float: right;
 }
 
-.status {
+.connection-status {
     background-color: var(--primary-colour);
     padding: 0;
     position: fixed;
@@ -175,7 +174,7 @@ This class makes the topnav look good on small screens
     width: fit-content;
     border-radius: 0 10px 0 0;
 }
-.status p {
+.connection-status p {
     margin: 7px;
 }
 

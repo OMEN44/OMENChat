@@ -1,40 +1,38 @@
+let u;
+
 const onLoginMessage = (payload) => {
     const message = JSON.parse(payload.body);
-    if (message.args[0] === "success") {
-        loggedInUser = message.args[1];
-        switchPage("selector");
-        let html = document.getElementById("chats-canvas").innerHTML
-        for (let i = 0; i < 15; i++) {
-            html = html + `
-            <div class="chat-card">
-                <div class="chat-top">
-                    <div class="chat-top-left">
-                        <div class="chat-name">
-                            <p>Name of chat</p>
-                        </div>
-                        <div class="chat-online">
-                            <p>online: 12</p>
-                        </div>
-                    </div>
-                    <div class="chat-top-right">
-                        <button class="button">Join</button>
-                        <button class="button">Delete Chat</button>
-                    </div>
-                </div>
-                <div class="chat-description">
-                    <p>Description of chat</p>
-                </div>
-            </div>
-            `
-        }
-        document.getElementById("chats-canvas").innerHTML = html;
-    } else {
-        //user not logged in
+    switch (message.args[0]) {
+        case "success":
+            loggedInUser = message.args[2];
+            schemeId = message.args[1]
+            loadChatSelector(loggedInUser);
+            stompClient.subscribe("/chat-selector/" + session, (payload) => {
+                onChatMessage(payload)
+            })
+            break;
+        case "incorrect":
+            document.getElementById("login-status").innerHTML = "Username or password is incorrect.";
+            break;
+        case "no-account":
+            document.getElementById("login-status").innerHTML = "No account found with username: " + u;
+            break;
+        case "cannot-create":
+            document.getElementById("login-status").innerHTML = "Account name " + u + " is already taken!";
+            break;
     }
 }
 
 document.getElementById("login-btn").addEventListener("click", (event) => {
     event.preventDefault();
+
+    u = document.getElementById("username").value;
+    const p = document.getElementById("password").value;
+
+    if (u === "" || p === "") {
+        document.getElementById("login-status").innerHTML = "Username and password must be filled in.";
+        return;
+    }
 
     fetch("http://ip-api.com/json/")
         .then(res => res.json()).then(data => {
@@ -43,12 +41,12 @@ document.getElementById("login-btn").addEventListener("click", (event) => {
             JSON.stringify({
                 group: "core",
                 label: "login",
-                senderId: "guest",
+                senderId: 0,
+                timeSent: new Date(),
                 args: [
-                    document.getElementById("username").value,
+                    u,
                     CryptoJS.SHA256(
-                        document.getElementById("username").value +
-                        document.getElementById("password").value
+                        u + p
                     ).toString(),
                     data.lon,
                     data.lat,
@@ -59,4 +57,48 @@ document.getElementById("login-btn").addEventListener("click", (event) => {
             })
         )
     })
+})
+
+document.getElementById("create-acc").addEventListener("click", (event) => {
+    event.preventDefault();
+
+    u = document.getElementById("username").value;
+    const p = document.getElementById("password").value;
+
+    if (u === "" || p === "") {
+        document.getElementById("login-status").innerHTML = "Username and password must be filled in.";
+        return;
+    }
+    if (p.length <= 4) {
+        document.getElementById("login-status").innerHTML = "Password must be longer than 4 digits";
+        return;
+    }
+    if (p.toLowerCase() === p) {
+        document.getElementById("login-status").innerHTML = "Password must contain at least 1 capital";
+        return;
+    }
+
+    fetch("http://ip-api.com/json/")
+        .then(res => res.json()).then(data => {
+        stompClient.send("/app/login", {}, JSON.stringify({
+            group: "core",
+            label: "createAcc",
+            senderId: 0,
+            timeSent: new Date(),
+            args: [
+                u,
+                CryptoJS.SHA256(
+                    u + p
+                ).toString(),
+                data.lon,
+                data.lat,
+                session
+            ]
+        }))
+    })
+})
+
+document.getElementById("forgot-pass").addEventListener("click", (event) => {
+    event.preventDefault();
+    document.getElementById("login-status").innerHTML = "Not implemented! Bro... remember your passwords....";
 })

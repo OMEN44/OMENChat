@@ -38,10 +38,15 @@
                     <div class="login-input-container">
                         <input class="input" placeholder="Username" id="username" type="text">
                         <input class="input" placeholder="Password" id="password" type="password">
+                        <p id="login-status"></p>
                     </div>
                     <div class="login-button-container">
                         <button class="button" id="login-btn" type="submit">Login</button>
                         <button class="button" id="create-acc" type="button">Create Account</button>
+                        <!--<button class="button" id="tc" type="button">
+                            <input type="checkbox">
+                            <a href="http://scam.com">Terms and conditions</a>
+                        </button>-->
                         <button class="button" id="forgot-pass" type="button">Forgot Password</button>
                     </div>
                 </form>
@@ -57,12 +62,15 @@
                     <h2>Where would you like to go?</h2>
                 </div>
                 <form class="chat-search" name="chat-search">
-                    <input id="search-input" autofocus class="chat-search-input input" type="text" autoFocus>
-                    <button id="chat-search" class="chat-search-button button" type="submit">Search</button>
+                    <input id="chat-input" autofocus class="input" type="text" placeholder="Chat name">
+                    <button id="chat-search" class="button" type="submit">Search</button>
+                    <button id="chat-create" class="button" type="button">Create Chat</button>
                 </form>
+                <div class="status">
+<!--                    <p>Chat status</p>-->
+                </div>
             </div>
             <div id="chats-canvas" class="chats-canvas">
-
             </div>
         </div>
 
@@ -83,13 +91,14 @@
     </div>
 
 
-    <div id="status-div" class="status fade-in">
+    <div id="status-div" class="connection-status fade-in">
         <p id="status-message">Connecting...</p>
     </div>
     <script src="js/switchPage.js" onload="switchPage(`login`)"></script>
     <script src="js/utils.js"></script>
     <script src="js/chat.js"></script>
     <script src="js/login.js"></script>
+    <script src="js/chatSelector.js"></script>
     <script src="websockets.js" onload="connect()"></script>
 </body>
 </html>

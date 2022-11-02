@@ -43,6 +43,11 @@
     border-bottom-style: solid;
     border-radius: 10px 10px 0 0;
     margin-bottom: 5px;
+    text-align: center;
+}
+
+.login-input-container p {
+    margin: 0;
 }
 
 .login-button-container {
