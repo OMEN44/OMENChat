@@ -25,6 +25,9 @@ public class Chat {
     private String chatName;
     @Getter
     @Setter
+    private String description;
+    @Getter
+    @Setter
     private int ownerId;
     @Getter
     @Setter

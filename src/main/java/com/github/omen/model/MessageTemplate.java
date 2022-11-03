@@ -53,7 +53,19 @@ public class MessageTemplate {
         return new MessageTemplate(group, label, args, new Date(), 0);
     }
 
+    public static MessageTemplate sentBySystemGroupless(String label, Object... args) {
+        return new MessageTemplate(null, label, args, new Date(), 0);
+    }
+
     public static MessageTemplate argsOnly(Object... args) {
         return new MessageTemplate(null, null, args, new Date(), 0);
+    }
+
+    public Object getArg(int index) {
+        return this.args[index];
+    }
+
+    public String getArgAsString(int index) {
+        return (String) this.args[index];
     }
 }

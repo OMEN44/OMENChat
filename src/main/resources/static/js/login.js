@@ -7,6 +7,8 @@ const onLoginMessage = (payload) => {
             loggedInUser = message.args[2];
             schemeId = message.args[1]
             loadChatSelector(loggedInUser);
+            // subscribe to the chat selector
+            console.log("/chat-selector/" + session)
             stompClient.subscribe("/chat-selector/" + session, (payload) => {
                 onChatMessage(payload)
             })
