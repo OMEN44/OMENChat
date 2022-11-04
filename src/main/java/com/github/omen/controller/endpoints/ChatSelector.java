@@ -6,6 +6,7 @@ import com.github.omen.controller.database.MessagesRepo;
 import com.github.omen.controller.database.UsersRepo;
 import com.github.omen.controller.database.entities.Chat;
 import com.github.omen.controller.database.entities.Member;
+import com.github.omen.controller.database.entities.Message;
 import com.github.omen.model.MessageTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -67,8 +68,15 @@ public class ChatSelector {
                 case "search" -> {
 
                 }
-                case "getChats" -> {
-                    sendChats(m);
+                case "getChats" -> sendChats(m);
+                case "joinChat" -> {
+                    System.out.println(m.getArg(0));
+                    List<Message> messages = mr.findMessagesByRecipientIdEqualsOrderByDateDesc(Integer.parseInt(m.getArgAsString(0)));
+                    String name = cr.findChatByChatIdEquals(Integer.parseInt(m.getArgAsString(0))).getChatName();
+                    messagingTemplate.convertAndSend(
+                            "/chat-selector/" + login.userSessionMap.get(m.getSenderId()),
+                            MessageTemplate.sentBySystemGroupless("joinChat", m.getArg(0), name, messages.toArray())
+                    );
                 }
             }
         }

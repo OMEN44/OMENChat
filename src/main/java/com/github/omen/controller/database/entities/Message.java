@@ -20,5 +20,6 @@ public class Message {
     private int senderId;
     private String content;
     private Date date;
-    private int recipient;
+    //this can be a chat or a user
+    private int recipientId;
 }

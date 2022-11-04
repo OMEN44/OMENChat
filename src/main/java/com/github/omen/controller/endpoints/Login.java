@@ -87,7 +87,6 @@ public class Login {
                         userSessionMap.replace(u.getId(), m.getArgAsString(5));
                     else
                         userSessionMap.put(u.getId(), m.getArgAsString(5));
-                    break;
                 } else {
                     destination = "/login/" + m.getArg(0);
                     message = MessageTemplate.argsOnly("cannot-create");

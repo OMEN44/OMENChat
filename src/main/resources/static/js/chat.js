@@ -1,3 +1,24 @@
+const loadChat = (id, name, messages) => {
+    switchPage("chat");
+    setTitle("Current chat: " + name);
+    let html = ""
+    for (const m of messages) {
+        let messageClass = "message";
+        if (loggedInUser === m.senderId)
+            messageClass += " from-user";
+
+        html += `
+            <div class="message-block">
+                <div id="${m.id}" class="${messageClass}" onclick="messagePressed(this)">
+                    <p>${m.senderId} | ...</p>
+                    <div class="divider"></div>
+                    <p>${m.content}</p>
+                </div>
+            </div>`
+    }
+    document.getElementById("message-canvas").innerHTML = html;
+}
+
 document.getElementById("send").addEventListener('click', (event) => {
     event.preventDefault();
     const messageInput = document.getElementById('input-bar')
@@ -9,8 +30,9 @@ document.getElementById("send").addEventListener('click', (event) => {
 
     if (messageContent && stompClient) {
         const chatMessage = {
+            group: "core",
             senderId: loggedInUser,
-            timeSent: time,
+            timeSent: new Date(),
             args: [messageInput.value]
         }
         stompClient.send("/app/chat", {}, JSON.stringify(chatMessage))
