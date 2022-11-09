@@ -5,7 +5,9 @@ import com.github.omen.controller.database.MembersRepo;
 import com.github.omen.controller.database.MessagesRepo;
 import com.github.omen.controller.database.UsersRepo;
 import com.github.omen.controller.database.entities.Member;
+import com.github.omen.controller.database.entities.Message;
 import com.github.omen.controller.database.entities.User;
+import com.github.omen.controller.endpoints.Login;
 import com.github.omen.model.MessageTemplate;
 import org.apache.catalina.session.StandardSessionFacade;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,15 +47,20 @@ public class MessageController {
     MessagesRepo mr;
     @Autowired
     MembersRepo memr;
+    @Autowired
+    Login login;
 
     @MessageMapping("/chat")
-    @SendTo("/chat")
-    public MessageTemplate onChatMessage(@Payload MessageTemplate m, SimpMessageHeaderAccessor headerAccessor) {
+    public void onChatMessage(@Payload MessageTemplate m) {
         Object[] args = m.getArgs();
-        args[m.getArgs().length] = m.getSenderId() + String.valueOf(m.getTimeSent());
-        return MessageTemplate.senderWithArgs(
-                m.getSenderId(),
-                args
+        args[m.getArgs().length - 1] = m.getSenderId() + String.valueOf(m.getTimeSent());
+        //mr.save(new Message(0, m.getSenderId(), m.getArgAsString(0), m.getTimeSent(), Integer.parseInt(m.getArgAsString(1))));
+        messagingTemplate.convertAndSend(
+                "/chat/" + login.userSessionMap.get(m.getSenderId()),
+                MessageTemplate.senderWithArgs(
+                        m.getSenderId(),
+                        args
+                )
         );
     }
 

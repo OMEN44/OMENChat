@@ -70,8 +70,7 @@ public class ChatSelector {
                 }
                 case "getChats" -> sendChats(m);
                 case "joinChat" -> {
-                    System.out.println(m.getArg(0));
-                    List<Message> messages = mr.findMessagesByRecipientIdEqualsOrderByDateDesc(Integer.parseInt(m.getArgAsString(0)));
+                    List<Message> messages = mr.findTopByRecipientIdEqualsOrderByDateDesc(50/*, Integer.parseInt(m.getArgAsString(0))*/);
                     String name = cr.findChatByChatIdEquals(Integer.parseInt(m.getArgAsString(0))).getChatName();
                     messagingTemplate.convertAndSend(
                             "/chat-selector/" + login.userSessionMap.get(m.getSenderId()),

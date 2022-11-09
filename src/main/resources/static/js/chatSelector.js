@@ -56,7 +56,8 @@ const onChatMessage = (payload) => {
             }
             break;
         case "joinChat":
-            loadChat(message.args[0], message.args[1], message.args.splice(0, 2))
+            let id = message.args.splice(0, 3);
+            loadChat(id[0], id[1], message.args)
             break;
     }
 }

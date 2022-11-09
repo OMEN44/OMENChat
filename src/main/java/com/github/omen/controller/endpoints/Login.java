@@ -50,7 +50,7 @@ public class Login {
                 } else {
                     //logged in!
                     message = MessageTemplate.argsOnly(
-                            "success", String.valueOf(u.getColourSchemeId()), String.valueOf(u.getId())
+                            "success", String.valueOf(u.getColourSchemeId()), String.valueOf(u.getId()), u.getUserName()
                     );
                     u.setLongitude((double) m.getArg(2));
                     u.setLatitude((double) m.getArg(3));
@@ -75,7 +75,7 @@ public class Login {
                             (double) m.getArg(2)
                     ));
 
-                    destination = "/login/" + m.getArg(0);
+                    destination = "/login/" + m.getArg(4);
                     message = MessageTemplate.argsOnly(
                             "success",
                             String.valueOf(0),
@@ -84,9 +84,9 @@ public class Login {
 
                     u = ur.findUserByUserNameEquals(m.getArgAsString(0));
                     if (userSessionMap.containsKey(u.getId()))
-                        userSessionMap.replace(u.getId(), m.getArgAsString(5));
+                        userSessionMap.replace(u.getId(), m.getArgAsString(4));
                     else
-                        userSessionMap.put(u.getId(), m.getArgAsString(5));
+                        userSessionMap.put(u.getId(), m.getArgAsString(4));
                 } else {
                     destination = "/login/" + m.getArg(0);
                     message = MessageTemplate.argsOnly("cannot-create");

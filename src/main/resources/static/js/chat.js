@@ -1,4 +1,5 @@
 const loadChat = (id, name, messages) => {
+    chatId = id;
     switchPage("chat");
     setTitle("Current chat: " + name);
     let html = ""
@@ -17,6 +18,10 @@ const loadChat = (id, name, messages) => {
             </div>`
     }
     document.getElementById("message-canvas").innerHTML = html;
+    stompClient.subscribe("/chat/" + session, (payload) => {
+        const message = JSON.parse(payload.body);
+        newMessage(message.args[0], message.timeSent, message.senderId, message.args[1]);
+    })
 }
 
 document.getElementById("send").addEventListener('click', (event) => {
@@ -33,7 +38,7 @@ document.getElementById("send").addEventListener('click', (event) => {
             group: "core",
             senderId: loggedInUser,
             timeSent: new Date(),
-            args: [messageInput.value]
+            args: [messageInput.value, chatId]
         }
         stompClient.send("/app/chat", {}, JSON.stringify(chatMessage))
         messageInput.value = ''
@@ -44,20 +49,20 @@ const messagePressed = (message) => {
     console.log(message.id);
 }
 
-const newMessage = (time, sender, args) => {
+const newMessage = (id, time, sender, content) => {
     let html = document.getElementById("message-canvas").innerHTML
     let messageClass = "message";
-    if (loggedInUser === sender)
+    if (loggedInUser.toString() === sender.toString())
         messageClass += " from-user";
 
     html += `
             <div class="message-block">
-                <div id="${args[0]}" class="${messageClass}" onclick="messagePressed(this)">
+                <div id="${id}" class="${messageClass}" onclick="messagePressed(this)">
                     <p>${sender} | ${time}</p>
                     <div class="divider"></div>
-                    <p>${args[1]}</p>
+                    <p>${content}</p>
                 </div>
             </div>`;
     document.getElementById("message-canvas").innerHTML = html;
-    document.getElementById(args[0]).scrollIntoView();
+    document.getElementById(id).scrollIntoView();
 }
