@@ -68,4 +68,8 @@ public class MessageTemplate {
     public String getArgAsString(int index) {
         return (String) this.args[index];
     }
+
+    public String getSession() {
+        return (String) this.args[this.args.length - 1];
+    }
 }
