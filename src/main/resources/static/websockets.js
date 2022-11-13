@@ -1,4 +1,4 @@
-let stompClient, session, username, chatId;
+let stompClient, session, chatId;
 let connected = false;
 let loggedInUser = null;
 

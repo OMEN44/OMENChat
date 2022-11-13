@@ -5,7 +5,6 @@ const onLoginMessage = (payload) => {
     switch (message.args[0]) {
         case "success":
             loggedInUser = message.args[2];
-            username = message.args[3]
             schemeId = message.args[1]
             loadChatSelector(loggedInUser);
             // subscribe to the chat selector

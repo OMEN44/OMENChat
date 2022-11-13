@@ -88,12 +88,14 @@ public class Login {
                     else
                         userSessionMap.put(u.getId(), m.getArgAsString(4));
                 } else {
-                    destination = "/login/" + m.getArg(0);
+                    destination = "/login/" + m.getArg(4);
                     message = MessageTemplate.argsOnly("cannot-create");
                 }
             }
         }
-        if (destination != null)
+        if (destination != null) {
+            System.out.println("Messaging: " + destination + "\nWith: " + message);
             messagingTemplate.convertAndSend(destination, message);
+        }
     }
 }

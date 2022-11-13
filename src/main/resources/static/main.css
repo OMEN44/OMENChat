@@ -124,6 +124,7 @@ This class makes the topnav look good on small screens
 .title-div h2 {
     margin: 3px;
     max-font-size: 3px;
+    width: fit-content;
 }
 
 .message-canvas {
@@ -216,10 +217,16 @@ This class makes the topnav look good on small screens
     margin: 2px auto;
     transition: border-color 0.1s;
     color: black;
+    outline: none;
+    background-color: #dadada;
 }
 
 .input:hover {
     border-color: var(--primary-colour);
+}
+
+.input:focus {
+    background-color: white;
 }
 
 /*scroll bar*/

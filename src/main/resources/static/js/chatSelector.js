@@ -1,3 +1,19 @@
+/*
+* To send a message to this endpoint the following labels can be used:
+*  - getChats
+*  - createChat
+*  - search
+*  - joinChat
+*  - leaveChat
+*  - deleteChat
+*
+* The arguments must be as follows:
+*  0: chat id
+*  1: input bar
+*  2: description
+*  3: session
+*/
+
 const onChatMessage = (payload) => {
     let message = JSON.parse(payload.body);
     switch (message.label) {
@@ -63,92 +79,55 @@ const onChatMessage = (payload) => {
 }
 
 const loadChatSelector = () => {
-    stompClient.send(
-        "/app/selector",
-        {},
-        JSON.stringify({
-            group: "core",
-            label: "getChats",
-            senderId: loggedInUser,
-            args: [session]
-        })
-    )
+    sendToChatSelector("getChats", null, null, null)
     switchPage("selector")
 }
 
+document.getElementById("chat-refresh").addEventListener("click", (event) => {
+    event.preventDefault();
+    loadChatSelector()
+})
+
 document.getElementById("chat-create").addEventListener("click", (event) => {
     event.preventDefault();
-    console.log(document.getElementById("chat-input").value.length)
     if (document.getElementById("chat-input").value.length >= 31) {
         document.getElementById("status").innerHTML = `<p>Chat name cannot be longer than 30 characters</p>`
         document.getElementById("chat-input").value = "";
         return;
     }
-    stompClient.send(
-        "/app/selector",
-        {},
-        JSON.stringify({
-            group: "core",
-            label: "createChat",
-            senderId: loggedInUser,
-            timeSent: new Date(),
-            args: [
-                document.getElementById("chat-input").value,
-                "description not implemented... oopsy"
-            ]
-        })
+    sendToChatSelector("createChat", null, document.getElementById("chat-input").value,
+        "description not implemented... oopsy"
     )
 })
 
 document.getElementById("chat-search").addEventListener("click", (event) => {
     event.preventDefault()
-    stompClient.send(
-        "/app/selector",
-        {},
-        JSON.stringify({
-            group: "core",
-            label: "search",
-            senderId: loggedInUser,
-            timeSent: new Date(),
-            args: [
-                document.getElementById("chat-input").value
-            ]
-        })
-    )
+    sendToChatSelector("search", null, document.getElementById("chat-input").value, null)
 })
 
 const joinChat = (event) => {
-    sendJson("/app/selector", {
-        group: "core",
-        label: "joinChat",
-        senderId: loggedInUser,
-        timeSent: new Date(),
-        args: [
-            event.target.getAttribute("data")
-        ]
-    })
+    sendToChatSelector("joinChat", event.target.getAttribute("data"), null, null)
 }
 
 const leaveChat = (event) => {
-    sendJson("/app/selector", {
-        group: "core",
-        label: "leaveChat",
-        senderId: loggedInUser,
-        timeSent: new Date(),
-        args: [
-            event.target.getAttribute("data")
-        ]
-    })
+    sendToChatSelector("leaveChat", event.target.getAttribute("data"), null, null)
 }
 
 const deleteChat = (event) => {
+    sendToChatSelector("deleteChat", event.target.getAttribute("data"), null, null)
+}
+
+const sendToChatSelector = (label, id, input, description) => {
     sendJson("/app/selector", {
         group: "core",
-        label: "deleteChat",
+        label: label,
         senderId: loggedInUser,
         timeSent: new Date(),
         args: [
-            event.target.getAttribute("data")
+            id,
+            input,
+            description,
+            session
         ]
     })
 }

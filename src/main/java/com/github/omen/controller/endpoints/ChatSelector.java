@@ -7,6 +7,7 @@ import com.github.omen.controller.database.UsersRepo;
 import com.github.omen.controller.database.entities.Chat;
 import com.github.omen.controller.database.entities.Member;
 import com.github.omen.controller.database.entities.Message;
+import com.github.omen.controller.database.entities.User;
 import com.github.omen.model.MessageTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -34,8 +35,37 @@ public class ChatSelector {
     @Autowired
     Login login;
 
+    /*
+     * To send a message to this endpoint the following labels can be used:
+     *  - getChats
+     *  - createChat
+     *  - search
+     *  - joinChat
+     *  - leaveChat
+     *  - deleteChat
+     *
+     * The arguments must be as follows:
+     *  0: chat id
+     *  1: input bar
+     *  2: description
+     *  3: session
+     *
+     * With joinChat being an exception to this format
+     */
+
     @MessageMapping("/selector")
     public void onSelectorMessage(@Payload MessageTemplate m) {
+        MessageTemplate message = null;
+        String destination = null;
+        User u;
+
+        switch ()
+
+
+        if (destination != null) {
+            System.out.println("Messaging: " + destination + "\nWith: " + message);
+            messagingTemplate.convertAndSend(destination, message);
+        }
 
         if (Objects.equals(m.getGroup(), "core") && m.getLabel() != null) {
             switch (m.getLabel()) {
