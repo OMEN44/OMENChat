@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface MembersRepo extends CrudRepository<Member, Integer> {
     List<Member> findMembersByUserIdEquals(int user);
+
+    void deleteMemberByChatIdEqualsAndUserIdEquals(int chatId, int userId);
 }

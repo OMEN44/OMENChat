@@ -36,9 +36,10 @@ document.getElementById("send").addEventListener('click', (event) => {
     if (messageContent && stompClient) {
         const chatMessage = {
             group: "core",
+            label: "sendMessage",
             senderId: loggedInUser,
             timeSent: new Date(),
-            args: [messageInput.value, chatId]
+            args: [messageInput.value, chatId, session]
         }
         stompClient.send("/app/chat", {}, JSON.stringify(chatMessage))
         messageInput.value = ''

@@ -12,7 +12,6 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -32,6 +31,20 @@ public class Login {
     MessagesRepo mr;
     @Autowired
     MembersRepo memr;
+
+    /*
+     * To send a message to this endpoint the following labels can be used:
+     *  - login
+     *  - createAcc
+     *  - resetPass
+     *
+     * The arguments must be as follows:
+     *  0: username
+     *  1: encrypted password
+     *  2: longitude
+     *  3: latitude
+     *  4: session
+     */
 
     @MessageMapping("/login")
     public void onLoginRequest(@Payload MessageTemplate m) {
@@ -56,12 +69,12 @@ public class Login {
                     u.setLatitude((double) m.getArg(3));
                     ur.save(u);
                 }
-                destination = "/login/" + m.getArg(6);
+                destination = "/login/" + m.getSession();
                 if (u != null) {
                     if (userSessionMap.containsKey(u.getId()))
-                        userSessionMap.replace(u.getId(), m.getArgAsString(6));
+                        userSessionMap.replace(u.getId(), m.getSession());
                     else
-                        userSessionMap.put(u.getId(), m.getArgAsString(6));
+                        userSessionMap.put(u.getId(), m.getSession());
                 }
             }
             case "createAcc" -> {
@@ -75,7 +88,7 @@ public class Login {
                             (double) m.getArg(2)
                     ));
 
-                    destination = "/login/" + m.getArg(4);
+                    destination = "/login/" + m.getSession();
                     message = MessageTemplate.argsOnly(
                             "success",
                             String.valueOf(0),
@@ -84,11 +97,11 @@ public class Login {
 
                     u = ur.findUserByUserNameEquals(m.getArgAsString(0));
                     if (userSessionMap.containsKey(u.getId()))
-                        userSessionMap.replace(u.getId(), m.getArgAsString(4));
+                        userSessionMap.replace(u.getId(), m.getSession());
                     else
-                        userSessionMap.put(u.getId(), m.getArgAsString(4));
+                        userSessionMap.put(u.getId(), m.getSession());
                 } else {
-                    destination = "/login/" + m.getArg(4);
+                    destination = "/login/" + m.getSession();
                     message = MessageTemplate.argsOnly("cannot-create");
                 }
             }

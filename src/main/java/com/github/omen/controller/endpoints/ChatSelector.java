@@ -32,8 +32,6 @@ public class ChatSelector {
     MessagesRepo mr;
     @Autowired
     MembersRepo memr;
-    @Autowired
-    Login login;
 
     /*
      * To send a message to this endpoint the following labels can be used:
@@ -57,18 +55,10 @@ public class ChatSelector {
     public void onSelectorMessage(@Payload MessageTemplate m) {
         MessageTemplate message = null;
         String destination = null;
-        User u;
 
-        switch ()
-
-
-        if (destination != null) {
-            System.out.println("Messaging: " + destination + "\nWith: " + message);
-            messagingTemplate.convertAndSend(destination, message);
-        }
-
-        if (Objects.equals(m.getGroup(), "core") && m.getLabel() != null) {
+        if (Objects.equals(m.getGroup(), "core") && m.getLabel() != null && m.getArgs().length == 4) {
             switch (m.getLabel()) {
+                case "getChats" -> sendChats(m);
                 case "createChat" -> {
                     //if chat with that name and owner doesn't exist:
                     if (!cr.existsChatByOwnerIdEqualsAndChatNameEquals(m.getSenderId(), m.getArgAsString(0))) {
@@ -89,25 +79,36 @@ public class ChatSelector {
                         //Remove with the addition of foreign keys
                         sendChats(m);
                     } else {
-                        messagingTemplate.convertAndSend(
-                                "/chat-selector/" + login.userSessionMap.get(m.getSenderId()),
-                                MessageTemplate.sentBySystemGroupless("chatExists", m.getArgAsString(0))
-                        );
+                        destination = "/chat-selector/" + m.getSession();
+                        message = MessageTemplate.sentBySystemGroupless("chatExists", m.getArgAsString(0));
                     }
                 }
                 case "search" -> {
 
                 }
-                case "getChats" -> sendChats(m);
                 case "joinChat" -> {
                     List<Message> messages = mr.findTopByRecipientIdEqualsOrderByDateDesc(50/*, Integer.parseInt(m.getArgAsString(0))*/);
                     String name = cr.findChatByChatIdEquals(Integer.parseInt(m.getArgAsString(0))).getChatName();
                     messagingTemplate.convertAndSend(
-                            "/chat-selector/" + login.userSessionMap.get(m.getSenderId()),
+                            "/chat-selector/" + m.getSession(),
                             MessageTemplate.sentBySystemGroupless("joinChat", m.getArg(0), name, messages.toArray())
                     );
                 }
+                case "leaveChat" -> {
+                    //check if user is owner of chat
+                    // if true -> cannot delete
+                    // else -> delete member where user equals id
+                    //send chats
+                }
+                case "deleteChat" -> {
+
+                }
             }
+        }
+
+        if (destination != null) {
+            System.out.println("Messaging: " + destination + "\nWith: " + message);
+            messagingTemplate.convertAndSend(destination, message);
         }
     }
 
@@ -119,7 +120,7 @@ public class ChatSelector {
                 chatList.add(cr.findChatByChatIdEquals(mem.getChatId()));
 
             messagingTemplate.convertAndSend(
-                    "/chat-selector/" + login.userSessionMap.get(m.getSenderId()),
+                    "/chat-selector/" + m.getSession(),
                     MessageTemplate.sentBySystemGroupless(
                             "showChats",
                             chatList.toArray()

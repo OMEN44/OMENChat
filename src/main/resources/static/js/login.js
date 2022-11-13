@@ -52,8 +52,6 @@ document.getElementById("login-btn").addEventListener("click", (event) => {
                     ).toString(),
                     data.lon,
                     data.lat,
-                    data.city,
-                    data.country,
                     session
                 ]
             })
