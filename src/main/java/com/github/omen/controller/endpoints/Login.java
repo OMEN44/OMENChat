@@ -16,6 +16,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import static com.github.omen.Logger.log;
+
 @Controller
 public class Login {
 
@@ -48,6 +50,7 @@ public class Login {
 
     @MessageMapping("/login")
     public void onLoginRequest(@Payload MessageTemplate m) {
+        log("Received from /login: \n" + m);
         MessageTemplate message = null;
         String destination = null;
         User u;
@@ -107,7 +110,7 @@ public class Login {
             }
         }
         if (destination != null) {
-            System.out.println("Messaging: " + destination + "\nWith: " + message);
+            log("Messaging: " + destination + "\nSending: " + message);
             messagingTemplate.convertAndSend(destination, message);
         }
     }

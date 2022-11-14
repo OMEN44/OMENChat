@@ -1,20 +1,21 @@
 /*
-* To send a message to this endpoint the following labels can be used:
-*  - getChats
-*  - createChat
-*  - search
-*  - joinChat
-*  - leaveChat
-*  - deleteChat
-*
-* The arguments must be as follows:
-*  0: chat id
-*  1: input bar
-*  2: description
-*  3: session
-*/
+To send a message to this endpoint the following labels can be used:
+ - getChats
+ - createChat
+ - search
+ - joinChat
+ - leaveChat
+ - deleteChat
 
-const onChatMessage = (payload) => {
+The arguments must be as follows:
+ 0: chat id
+ 1: input bar
+ 2: description
+ 3: session
+ */
+
+//Handler for receiving payload from server
+const onChatSelectorMessage = (payload) => {
     let message = JSON.parse(payload.body);
     switch (message.label) {
         case "chatExists":
@@ -72,17 +73,18 @@ const onChatMessage = (payload) => {
             }
             break;
         case "joinChat":
-            let id = message.args.splice(0, 3);
-            loadChat(id[0], id[1], message.args)
+            loadChat(message.args[0], message.args[1])
             break;
     }
 }
 
+//function for loading the chat selector
 const loadChatSelector = () => {
     sendToChatSelector("getChats", null, null, null)
     switchPage("selector")
 }
 
+//event listeners for buttons
 document.getElementById("chat-refresh").addEventListener("click", (event) => {
     event.preventDefault();
     loadChatSelector()
@@ -117,6 +119,7 @@ const deleteChat = (event) => {
     sendToChatSelector("deleteChat", event.target.getAttribute("data"), null, null)
 }
 
+//method to be used when sending messages to the server
 const sendToChatSelector = (label, id, input, description) => {
     sendJson("/app/selector", {
         group: "core",

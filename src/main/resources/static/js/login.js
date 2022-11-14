@@ -6,12 +6,12 @@ const onLoginMessage = (payload) => {
         case "success":
             loggedInUser = message.args[2];
             schemeId = message.args[1]
-            loadChatSelector(loggedInUser);
             // subscribe to the chat selector
             console.log("/chat-selector/" + session)
             stompClient.subscribe("/chat-selector/" + session, (payload) => {
-                onChatMessage(payload)
+                onChatSelectorMessage(payload)
             })
+            loadChatSelector();
             break;
         case "incorrect":
             document.getElementById("login-status").innerHTML = "Username or password is incorrect.";
@@ -56,6 +56,23 @@ document.getElementById("login-btn").addEventListener("click", (event) => {
                 ]
             })
         )
+    }).catch(error => {
+        console.error("Number of daily location queries reached")
+        sendJson("/app/login", {
+            group: "core",
+            label: "login",
+            senderId: 0,
+            timeSent: new Date(),
+            args: [
+                u,
+                CryptoJS.SHA256(
+                    u + p
+                ).toString(),
+                0.00,
+                0.00,
+                session
+            ]
+        })
     })
 })
 

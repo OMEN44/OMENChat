@@ -5,8 +5,10 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface    MessagesRepo extends CrudRepository<Message, Integer> {
+public interface MessagesRepo extends CrudRepository<Message, Integer> {
     List<Message> findMessagesByRecipientIdEqualsOrderByDateDesc(int recipientId);
 
-    List<Message> findTopByRecipientIdEqualsOrderByDateDesc(int limit);
+    List<Message> findAllByRecipientIdEqualsOrderByDateDesc(int recipientId);
+
+    Message findByContentEquals(String content);
 }

@@ -45,6 +45,10 @@ public class MessageTemplate {
         return new MessageTemplate(group, label, args, new Date(), senderId);
     }
 
+    public static MessageTemplate currentDateGroupless(String label, int senderId, Object... args) {
+        return new MessageTemplate(null, label, args, new Date(), senderId);
+    }
+
     public static MessageTemplate senderWithArgs(int senderId, Object... args) {
         return new MessageTemplate(null, null, args, new Date(), senderId);
     }
@@ -70,6 +74,10 @@ public class MessageTemplate {
     }
 
     public String getSession() {
-        return (String) this.args[this.args.length - 1];
+        try {
+            if (this.args.length > 0) return (String) this.args[this.args.length - 1]; else return null;
+        } catch (ClassCastException e) {
+            return null;
+        }
     }
 }
